@@ -1,8 +1,8 @@
 {
   "name": "postcss-px-to-viewport",
   "description": "A CSS post-processor that converts px to viewport units (vw, vh, vmin, vmax).",
-  "version": "2.1.1",
-  "author": "Precog <hcprecog@gmail.com>",
+  "version": "1.1.1",
+  "author": "Dmitry Karpunin <koderfunk@gmail.com>",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -28,13 +28,13 @@
     "test": "jest spec/*.spec.js"
   },
   "dependencies": {
-    "object-assign": ">=4.1.1"
+    "object-assign": ">=4.0.1"
   },
   "devDependencies": {
-    "jest": "^29.6.3",
-    "postcss": ">=8.0.0"
+    "jest": "^25.4.0",
+    "postcss": ">=5.0.2"
   },
   "peerDependencies": {
-    "postcss": ">=8.0.0"
+    "postcss": ">=5.0.2"
   }
 }

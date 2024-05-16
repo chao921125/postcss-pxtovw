@@ -1,15 +1,15 @@
 # postcss-px-to-viewport
 [![NPM version](https://badge.fury.io/js/postcss-px-to-viewport.svg)](http://badge.fury.io/js/postcss-px-to-viewport)
 
-[English](README.md) | 中文
+English | [中文](README_CN.md) 
 
-将px单位转换为视口单位的 (vw, vh, vmin, vmax) 的 [PostCSS](https://github.com/postcss/postcss) 插件.
+A plugin for [PostCSS](https://github.com/postcss/postcss) that generates viewport units (vw, vh, vmin, vmax) from pixel units.
 
-## 简介
+## Demo
 
-如果你的样式需要做根据视口大小来调整宽度，这个脚本可以将你CSS中的px单位转化为vw，1vw等于1/100视口宽度。
+If your project involves a fixed width, this script will help to convert pixels into viewport units.
 
-### 输入
+### Input
 
 ```css
 .class {
@@ -40,7 +40,7 @@
 }
 ```
 
-### 输出
+### Output
 ```css
 .class {
   margin: -3.125vw .5vh;
@@ -69,21 +69,21 @@
 }
 ```
 
-## 上手
+## Getting Started
 
-### 安装
-使用npm安装
+### Installation
+Add via npm
 ```
 $ npm install postcss-px-to-viewport --save-dev
 ```
-或者使用yarn进行安装
+or yarn
 ```
 $ yarn add -D postcss-px-to-viewport
 ```
 
-### 配置参数
+### Usage
 
-默认参数:
+Default Options:
 ```js
 {
   unitToConvert: 'px',
@@ -103,39 +103,39 @@ $ yarn add -D postcss-px-to-viewport
   landscapeWidth: 568
 }
 ```
-- `unitToConvert` (String) 需要转换的单位，默认为"px"
-- `viewportWidth` (Number) 设计稿的视口宽度
-- `unitPrecision` (Number) 单位转换后保留的精度
-- `propList` (Array) 能转化为vw的属性列表
-	- 传入特定的CSS属性；
-	- 可以传入通配符"*"去匹配所有属性，例如：['*']；
-	- 在属性的前或后添加"*",可以匹配特定的属性. (例如['*position*'] 会匹配 background-position-y)
-	- 在特定属性前加 "!"，将不转换该属性的单位 . 例如: ['*', '!letter-spacing']，将不转换letter-spacing
-	- "!" 和 "*"可以组合使用， 例如: ['*', '!font*']，将不转换font-size以及font-weight等属性
-- `viewportUnit` (String) 希望使用的视口单位
-- `fontViewportUnit` (String) 字体使用的视口单位
-- `selectorBlackList` (Array) 需要忽略的CSS选择器，不会转为视口单位，使用原有的px等单位。
-	- 如果传入的值为字符串的话，只要选择器中含有传入值就会被匹配
-		- 例如 `selectorBlackList` 为 `['body']` 的话， 那么 `.body-class` 就会被忽略
-	- 如果传入的值为正则表达式的话，那么就会依据CSS选择器是否匹配该正则
-		- 例如 `selectorBlackList` 为 `[/^body$/]` , 那么 `body` 会被忽略，而 `.body` 不会
-- `minPixelValue` (Number) 设置最小的转换数值，如果为1的话，只有大于1的值会被转换
-- `mediaQuery` (Boolean) 媒体查询里的单位是否需要转换单位
-- `replace` (Boolean) 是否直接更换属性值，而不添加备用属性
-- `exclude` (Array or Regexp) 忽略某些文件夹下的文件或特定文件，例如 'node_modules' 下的文件
-	- 如果值是一个正则表达式，那么匹配这个正则的文件会被忽略
-	- 如果传入的值是一个数组，那么数组里的值必须为正则
-- `include` (Array or Regexp) 如果设置了`include`，那将只有匹配到的文件才会被转换，例如只转换 'src/mobile' 下的文件
-	(`include: /\/src\/mobile\//`)
-	- 如果值是一个正则表达式，将包含匹配的文件，否则将排除该文件
-	- 如果传入的值是一个数组，那么数组里的值必须为正则
-- `landscape` (Boolean) 是否添加根据 `landscapeWidth` 生成的媒体查询条件 `@media (orientation: landscape)`
-- `landscapeUnit` (String) 横屏时使用的单位
-- `landscapeWidth` (Number) 横屏时使用的视口宽度
+- `unitToConvert` (String) unit to convert, by default, it is px.
+- `viewportWidth` (Number) The width of the viewport.
+- `unitPrecision` (Number) The decimal numbers to allow the vw units to grow to.
+- `propList` (Array) The properties that can change from px to vw.
+  - Values need to be exact matches.
+  - Use wildcard * to enable all properties. Example: ['*']
+  - Use * at the start or end of a word. (['*position*'] will match background-position-y)
+  - Use ! to not match a property. Example: ['*', '!letter-spacing']
+  - Combine the "not" prefix with the other prefixes. Example: ['*', '!font*']
+- `viewportUnit` (String) Expected units.
+- `fontViewportUnit` (String) Expected units for font.
+- `selectorBlackList` (Array) The selectors to ignore and leave as px.
+    - If value is string, it checks to see if selector contains the string.
+        - `['body']` will match `.body-class`
+    - If value is regexp, it checks to see if the selector matches the regexp.
+        - `[/^body$/]` will match `body` but not `.body`
+- `minPixelValue` (Number) Set the minimum pixel value to replace.
+- `mediaQuery` (Boolean) Allow px to be converted in media queries.
+- `replace` (Boolean) replaces rules containing vw instead of adding fallbacks.
+- `exclude` (Regexp or Array of Regexp) Ignore some files like 'node_modules'
+    - If value is regexp, will ignore the matches files.
+    - If value is array, the elements of the array are regexp.
+- `include` (Regexp or Array of Regexp) If `include` is set, only matching files will be converted,
+    for example, only files under `src/mobile/` (`include: /\/src\/mobile\//`)
+    - If the value is regexp, the matching file will be included, otherwise it will be excluded.
+    - If value is array, the elements of the array are regexp.
+- `landscape` (Boolean) Adds `@media (orientation: landscape)` with values converted via `landscapeWidth`.
+- `landscapeUnit` (String) Expected unit for `landscape` option
+- `landscapeWidth` (Number) Viewport width for landscape orientation.
 
-> `exclude`和`include`是可以一起设置的，将取两者规则的交集。
+> `exclude` and `include` can be set together, and the intersection of the two rules will be taken.
 
-#### Ignoring (需要翻译帮助。)
+#### Ignoring
 
 You can use special comments for ignore conversion of single lines:
 - `/* px-to-viewport-ignore-next */` — on a separate line, prevents conversion on the next line.
@@ -164,9 +164,9 @@ Example:
 There are several more reasons why your pixels may not convert, the following options may affect this:
 `propList`, `selectorBlackList`, `minPixelValue`, `mediaQuery`, `exclude`, `include`.
 
-#### 使用PostCss配置文件时
+#### Use with PostCss configuration file
 
-在`postcss.config.js`添加如下配置
+add to your `postcss.config.js`
 ```js
 module.exports = {
   plugins: {
@@ -178,9 +178,9 @@ module.exports = {
 }
 ```
 
-#### 直接在gulp中使用，添加gulp-postcss
+#### Use with gulp-postcss
 
-在 `gulpfile.js` 添加如下配置:
+add to your `gulpfile.js`:
 ```js
 var gulp = require('gulp');
 var postcss = require('gulp-postcss');
@@ -201,50 +201,50 @@ gulp.task('css', function () {
 });
 ```
 
-## 参与贡献
+## Contributing
 
-在提PR之前，请先阅读 [代码指南](CODE-OF-CONDUCT.md)
-和 [贡献指南](CONTRIBUTING.md)
+Please read [Code of Conduct](CODE-OF-CONDUCT.md)
+and [Contributing Guidelines](CONTRIBUTING.md) for submitting pull requests to us.
 
-## 测试
+## Running the tests
 
-为了跑测试案例，您需要安装开发套件:
+In order to run tests, you need to install dev-packages:
 ```
 $ npm install
 ```
-然后输入下面的命令:
+Then run the tests via npm script:
 ```
 $ npm run test
 ```
 
 ## Changelog
 
-变更日志在 [这](CHANGELOG.md).
+The changelog is [here](CHANGELOG.md).
 
-## 版本跟踪
+## Versioning
 
-使用 [SemVer](http://semver.org/) 做版本跟踪， 可用版本可在[这](https://github.com/evrone/postcss-px-to-viewport/tags)看到
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/evrone/postcss-px-to-viewport/tags). 
 
-## 作者
+## Authors
 
 * [Dmitry Karpunin](https://github.com/KODerFunk) - *Initial work*
 * [Ivan Bunin](https://github.com/chernobelenkiy)
 
-在 [contributors](https://github.com/evrone/postcss-px-to-viewport/contributors) 里可以看到谁参与了本项目.
+See also the list of [contributors](https://github.com/evrone/postcss-px-to-viewport/contributors) who participated in this project.
 
-## 许可
+## License
 
-本项目使用 [MIT License](LICENSE).
+This project is licensed under the [MIT License](LICENSE).
 
-## 赞助商
+## Sponsors
 
-访问 [Evrone](https://evrone.com/)网站以获取有关[项目构建](https://evrone.com/cases)的更多信息。
+Visit [Evrone](https://evrone.com/) website to get more information about the [projects](https://evrone.com/cases) build.
 
 <a href="https://evrone.com/?utm_source=postcss-px-to-viewport">
   <img src="https://user-images.githubusercontent.com/417688/34437029-dbfe4ee6-ecab-11e7-9d80-2b274b4149b3.png"
        alt="Sponsored by Evrone" width="231" />
 </a>
 
-## 借鉴自
+## Acknowledgments
 
-* 受 https://github.com/cuth/postcss-pxtorem/ 启发有了这个项目
+* Hat tip to https://github.com/cuth/postcss-pxtorem/ for inspiring us for this project.
