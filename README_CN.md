@@ -74,11 +74,15 @@
 ### 安装
 使用npm安装
 ```
-$ npm install postcss-px-to-viewport --save-dev
+$ npm install --save-dev postcss-pxtovw postcss
 ```
-或者使用yarn进行安装
+or yarn
 ```
-$ yarn add -D postcss-px-to-viewport
+$ yarn add -D postcss-pxtovw postcss
+```
+or pnpm
+```
+$ pnpm add -D postcss-pxtovw postcss
 ```
 
 ### 配置参数
@@ -171,7 +175,7 @@ There are several more reasons why your pixels may not convert, the following op
 module.exports = {
   plugins: {
     // ...
-    'postcss-px-to-viewport': {
+    'postcss-pxtovw': {
       // options
     }
   }
@@ -184,7 +188,7 @@ module.exports = {
 ```js
 var gulp = require('gulp');
 var postcss = require('gulp-postcss');
-var pxtoviewport = require('postcss-px-to-viewport');
+var pxtoviewport = require('postcss-pxtovw');
 
 gulp.task('css', function () {
 

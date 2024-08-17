@@ -74,11 +74,15 @@ If your project involves a fixed width, this script will help to convert pixels 
 ### Installation
 Add via npm
 ```
-$ npm install postcss-px-to-viewport --save-dev
+$ npm install --save-dev postcss-pxtovw postcss
 ```
 or yarn
 ```
-$ yarn add -D postcss-px-to-viewport
+$ yarn add -D postcss-pxtovw postcss
+```
+or pnpm
+```
+$ pnpm add -D postcss-pxtovw postcss
 ```
 
 ### Usage
@@ -171,7 +175,7 @@ add to your `postcss.config.js`
 module.exports = {
   plugins: {
     // ...
-    'postcss-px-to-viewport': {
+    'postcss-pxtovw': {
       // options
     }
   }
@@ -184,7 +188,7 @@ add to your `gulpfile.js`:
 ```js
 var gulp = require('gulp');
 var postcss = require('gulp-postcss');
-var pxtoviewport = require('postcss-px-to-viewport');
+var pxtoviewport = require('postcss-pxtovw');
 
 gulp.task('css', function () {
 
